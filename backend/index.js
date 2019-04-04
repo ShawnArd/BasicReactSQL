@@ -26,8 +26,8 @@ app.get('/', (req, res ) => {
 });
 
 app.get('/products/add', (req, res) => {
-    const { name, price} = req.query
-    const insertQuery = `INSERT INTO products (prod_name, prod_price) values ('${name}', '${price}')`;
+    const { name, quantity, price} = req.query
+    const insertQuery = `INSERT INTO products (prod_name, quantity, prod_price) values ('${name}','${quantity}', '${price}')`;
     connection.query(insertQuery, (err, results) => {
         if(err) {
             return res.send(err);

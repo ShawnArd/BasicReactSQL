@@ -7,6 +7,7 @@ class App extends Component {
     products: [],
     product: {
       name: 'sample',
+      quantity: 10,
       price: 20
     }
   }
@@ -23,13 +24,13 @@ class App extends Component {
 
 addProduct = _ => {
   const { product } = this.state;
-  fetch(`http://localhost:4000/products/add?name=${product.name}&price=${product.price}`)
+  fetch(`http://localhost:4000/products/add?name=${product.name}&quantity=${product.quantity}&price=${product.price}`)
   .then(this.getProducts)
   .catch(err => console.error(err))
 }
 
 
-  renderProduct = ({ Product_id, prod_name}) => <div key={Product_id}>{prod_name}</div>
+  renderProduct = ({ Product_id, prod_name, quantity, prod_price}) => <div key={Product_id}>{prod_name} | {quantity} | {prod_price}</div>
 
   render() {
     const { products, product } = this.state;
@@ -40,6 +41,7 @@ addProduct = _ => {
       
       <div>
         <input value={product.name} onChange={e=> this.setState({ product: { ...product, name: e.target.value}})} />
+        <input value={product.quantity} onChange={e=> this.setState({ product: { ...product, quantity: e.target.value}})} />
         <input value={product.price} 
         onChange={e=> this.setState({ product: { ...product, price: e.target.value}})}
         />
